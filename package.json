@@ -6,6 +6,7 @@
     "dev": "next dev --port 3001",
     "build": "next build",
     "start": "next start --port 3001",
+    "start:azure": "next start -p ${PORT:-3000}",
     "lint": "eslint app lib --ext .ts,.tsx"
   },
   "dependencies": {
