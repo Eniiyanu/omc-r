@@ -1,3 +1,4 @@
+import { isConfigured } from "@/lib/atlascore";
 import { generateAlarmNow, getAlarms } from "@/lib/store";
 
 export const dynamic = "force-dynamic";
@@ -14,6 +15,10 @@ export async function GET(request: Request) {
 }
 
 export async function POST() {
+  if (isConfigured()) {
+    // Cannot inject alarms into a live backend — no-op
+    return Response.json({ message: "Alarm injection unavailable on live feed" }, { status: 200 });
+  }
   const alarm = generateAlarmNow();
   return Response.json({ alarm }, { status: 201 });
 }
